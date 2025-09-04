@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CustomZee | Shop</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <div class="logo">CustomZee</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for products..." />
+      <button>🔍</button>
+    </div>
+    <div class="nav-links">
+      <a href="#">Sign In</a>
+      <a href="#">Orders</a>
+      <a href="#">Cart 🛒</a>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Hero Banner">
+    <div class="hero-text">
+      <h1>Give designs, get products</h1>
+      <p>Let your own creativity and uniqueness shine!!</p>
+      <button class="btn-primary">Shop Now</button>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories">
+    <h2>Shop by Category</h2>
+    <div class="category-grid">
+      <div class="category-card">Electronics</div>
+      <div class="category-card">Fashion</div>
+      <div class="category-card">Home</div>
+      <div class="category-card">Beauty</div>
+      <div class="category-card">Sports</div>
+      <div class="category-card">Books</div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="products">
+    <h2>Featured Products</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/Cup.jpg') }}" alt="Product">
+        <h3>Barista White Mug</h3>
+        <p class="price">Rs.200</p>
+        <p class="description">15oz / 420ml</p>
+        <button class="btn-secondary">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/Pillowcase.jpg') }}" alt="Product">
+        <h3>Down-Alternative Damask Pillow</h3>
+        <p class="price">Rs.400</p>
+        <p class="description">Soft/Queen size/Cotton</p>
+        <button class="btn-secondary">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/T-shirt.jpg') }}" alt="Product">
+        <h3>Coolmax T-shirt</h3>
+        <p class="price">Rs.750</p>
+        <p class="description">Soft/Round neck/brand STCO</p>
+        <button class="btn-secondary">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/Hoodie.jpg') }}" alt="Product">
+        <h3>Oversize Heavyweight Hoodie</h3>
+        <p class="price">Rs.1500</p>
+        <p class="description">52% cotton/48% polyester</p>
+        <button class="btn-secondary">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 CustomZee. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
