@@ -1,0 +1,49 @@
+@startuml
+class User {
+  +userId: int
+  +name: string
+  +email: string
+  +password: string
+  +login()
+  +logout()
+}
+
+class Customer {
+  +browseProducts()
+  +placeOrder()
+}
+class Admin {
+  +addProduct()
+  +removeProduct()
+  +updateProduct()
+}
+
+class Product {
+  +productId: int
+  +name: string
+  +description: string
+  +price: float
+  +category: string
+}
+
+class Cart {
+  +cartId: int
+  +addItem()
+  +removeItem()
+  +checkout()
+}
+
+class Order {
+  +orderId: int
+  +date: Date
+  +status: string
+  +calculateTotal()
+}
+
+User <|-- Customer
+User <|-- Admin
+Customer --> Cart
+Cart --> Product
+Customer --> Order
+Order --> Product
+@enduml
