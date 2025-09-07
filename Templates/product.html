@@ -6,33 +6,41 @@
   <title>T-Shirt Product Page</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
     .product-container {
-      max-width: 900px;
+      max-width: 700px;
       margin: 2rem auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
     }
     .product-images {
-      flex: 1;
-      text-align: center;
       position: relative;
     }
     .product-images img {
       width: 100%;
-      max-width: 400px;
+      max-width: 500px;
       border-radius: 8px;
     }
     .slider-controls {
       position: absolute;
       top: 50%;
-      width: 100%;
+      left: 0;
+      right: 0;
       display: flex;
       justify-content: space-between;
       transform: translateY(-50%);
+      padding: 0 10px;
     }
     .slider-btn {
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.6);
       color: #fff;
       border: none;
       font-size: 1.5rem;
@@ -40,35 +48,33 @@
       cursor: pointer;
       border-radius: 50%;
     }
-    .color-options {
-      margin-top: 1rem;
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-    .color-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid #ccc;
-    }
     .product-details {
-      flex: 1;
+      margin-top: 1rem;
+      text-align: left;
     }
     .product-details h1 {
       margin-bottom: 0.5rem;
     }
     .product-details p {
       margin-bottom: 1rem;
+      color: #444;
     }
-    .btn-primary {
-      padding: 0.5rem 1rem;
-      background: #232f3e;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+    .feedback-section {
+      margin-top: 2rem;
+      text-align: left;
+    }
+    .feedback-section h2 {
+      margin-bottom: 1rem;
+    }
+    .feedback {
+      background: #f1f1f1;
+      padding: 0.8rem;
+      border-radius: 5px;
+      margin-bottom: 0.8rem;
+    }
+    .feedback strong {
+      display: block;
+      margin-bottom: 0.3rem;
     }
   </style>
 </head>
@@ -77,65 +83,100 @@
   <div class="product-container">
     <!-- Product Images with Slider -->
     <div class="product-images">
-      <img id="main-image" src="static/images/T-shirt.jpg" alt="T-shirt">
+      <img id="main-image" src="static/images/T-shirt.jpg" alt="White T-shirt">
 
       <!-- Slider Controls -->
       <div class="slider-controls">
         <button class="slider-btn" onclick="prevImage()">&#10094;</button>
         <button class="slider-btn" onclick="nextImage()">&#10095;</button>
       </div>
-
-      <!-- Color Options -->
-      <div class="color-options">
-        <div class="color-btn" style="background:black;" onclick="setColor('black')"></div>
-        <div class="color-btn" style="background:green;" onclick="setColor('green')"></div>
-        <div class="color-btn" style="background:blue;" onclick="setColor('blue')"></div>
-        <div class="color-btn" style="background:pink;" onclick="setColor('pink')"></div>
-      </div>
     </div>
 
     <!-- Product Details -->
-    <div class="product-card">
-        <img src="{{ url_for('static', filename='images/T-shirt.jpg') }}" alt="Product">
-        <h3>Coolmax T-shirt</h3>
-        <p class="price">Rs.750</p>
-        <p class="description">Soft/Round neck/brand STCO</p>
-      <button class="btn-primary">Add to Cart</button>
+    <div class="product-details">
+      <h1>Classic White T-Shirt</h1>
+      <p><strong>Price:</strong> $19.99</p>
+      <p>A comfortable and stylish white t-shirt that suits every occasion.</p>
     </div>
+
+    <!-- Customer Feedback -->
+    <div class="feedback-section">
+      <h2>Customer Feedback</h2>
+<!-- Feedback List -->
+      <div id="feedback-list"></div>
+
+      <!-- Feedback Form -->
+      <div class="feedback-form">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <textarea id="comment" placeholder="Write your feedback..." rows="4" required></textarea>
+        <button onclick="addFeedback()">Submit Feedback</button>
+      </div>
+    </div>
+      <!--<div class="feedback">
+        <strong>John D.</strong>
+        Great quality T-shirt, very comfortable to wear!
+      </div>
+
+      <div class="feedback">
+        <strong>Sophia R.</strong>
+        The fabric is soft and delivery was fast. Loved it.
+      </div>
+
+      <div class="feedback">
+        <strong>Amit S.</strong>
+        Fits perfectly. Will definitely buy again.
+      </div>
+    </div>-->
   </div>
 
   <script>
-    // Images grouped by color
-    const productImages = {
-      black: ["T-shirt_black.jpg"],
-      green: ["T-shirt_green.jpg"],
-      blue: ["T-shirt_blue.jpg"],
-      pink: ["T-shirt_pink.jpg"]
-    };
+    // Array of product images (only white T-shirt here)
+    const productImages = [
+      "T-shirt_blue.jpg",
+      "T-shirt_black.jpg",
+      "T-shirt_pink.jpg",
+      "T-shirt_green.jpg"
+    ];
 
-    let currentColor = "black";
     let currentIndex = 0;
 
     function updateImage() {
-      document.getElementById("main-image").src = "static/images/" + productImages[currentColor][currentIndex];
-    }
-
-    function setColor(color) {
-      currentColor = color;
-      currentIndex = 0;
-      updateImage();
+      document.getElementById("main-image").src = "static/images/" + productImages[currentIndex];
     }
 
     function nextImage() {
-      currentIndex = (currentIndex + 1) % productImages[currentColor].length;
+      currentIndex = (currentIndex + 1) % productImages.length;
       updateImage();
     }
 
     function prevImage() {
-      currentIndex = (currentIndex - 1 + productImages[currentColor].length) % productImages[currentColor].length;
+      currentIndex = (currentIndex - 1 + productImages.length) % productImages.length;
       updateImage();
     }
+     // Add customer feedback
+    function addFeedback() {
+      const name = document.getElementById("name").value.trim();
+      const comment = document.getElementById("comment").value.trim();
+
+      if (name && comment) {
+        const feedbackList = document.getElementById("feedback-list");
+
+        const feedbackDiv = document.createElement("div");
+        feedbackDiv.classList.add("feedback");
+
+        feedbackDiv.innerHTML = `<strong>${name}</strong>${comment}`;
+
+        feedbackList.prepend(feedbackDiv); // newest on top
+
+        // Clear input fields
+        document.getElementById("name").value = "";
+        document.getElementById("comment").value = "";
+      } else {
+        alert("Please fill out both fields.");
+      }
+    }
   </script>
+  
 
 </body>
 </html>
