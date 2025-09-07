@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   background: #eca5a5;
   color: #333;
   line-height: 1.6;
@@ -90,6 +90,8 @@ a {
 .categories {
   padding: 2rem;
   text-align: center;
+ 
+  ;
 }
 .category-grid {
   display: grid;
@@ -103,6 +105,8 @@ a {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   font-weight: 600;
+  font-size: 1.2rem;      
+  font-family: 'Poppins';
   transition: transform 0.2s ease;
   cursor: pointer;
 }

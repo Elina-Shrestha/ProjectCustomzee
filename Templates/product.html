@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T-Shirt Product Page</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    .product-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .product-images {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .product-images img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+    }
+    .slider-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .slider-btn {
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      font-size: 1.5rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    .color-options {
+      margin-top: 1rem;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .color-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #ccc;
+    }
+    .product-details {
+      flex: 1;
+    }
+    .product-details h1 {
+      margin-bottom: 0.5rem;
+    }
+    .product-details p {
+      margin-bottom: 1rem;
+    }
+    .btn-primary {
+      padding: 0.5rem 1rem;
+      background: #232f3e;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="product-container">
+    <!-- Product Images with Slider -->
+    <div class="product-images">
+      <img id="main-image" src="static/images/T-shirt.jpg" alt="T-shirt">
+
+      <!-- Slider Controls -->
+      <div class="slider-controls">
+        <button class="slider-btn" onclick="prevImage()">&#10094;</button>
+        <button class="slider-btn" onclick="nextImage()">&#10095;</button>
+      </div>
+
+      <!-- Color Options -->
+      <div class="color-options">
+        <div class="color-btn" style="background:black;" onclick="setColor('black')"></div>
+        <div class="color-btn" style="background:green;" onclick="setColor('green')"></div>
+        <div class="color-btn" style="background:blue;" onclick="setColor('blue')"></div>
+        <div class="color-btn" style="background:pink;" onclick="setColor('pink')"></div>
+      </div>
+    </div>
+
+    <!-- Product Details -->
+    <div class="product-card">
+        <img src="{{ url_for('static', filename='images/T-shirt.jpg') }}" alt="Product">
+        <h3>Coolmax T-shirt</h3>
+        <p class="price">Rs.750</p>
+        <p class="description">Soft/Round neck/brand STCO</p>
+      <button class="btn-primary">Add to Cart</button>
+    </div>
+  </div>
+
+  <script>
+    // Images grouped by color
+    const productImages = {
+      black: ["T-shirt_black.jpg"],
+      green: ["T-shirt_green.jpg"],
+      blue: ["T-shirt_blue.jpg"],
+      pink: ["T-shirt_pink.jpg"]
+    };
+
+    let currentColor = "black";
+    let currentIndex = 0;
+
+    function updateImage() {
+      document.getElementById("main-image").src = "static/images/" + productImages[currentColor][currentIndex];
+    }
+
+    function setColor(color) {
+      currentColor = color;
+      currentIndex = 0;
+      updateImage();
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % productImages[currentColor].length;
+      updateImage();
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + productImages[currentColor].length) % productImages[currentColor].length;
+      updateImage();
+    }
+  </script>
+
+</body>
+</html>
